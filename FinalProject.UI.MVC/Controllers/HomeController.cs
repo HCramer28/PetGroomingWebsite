@@ -26,5 +26,12 @@ namespace FinalProject.UI.MVC.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult Packages()
+        {
+            ViewBag.Message = "Packages";
+
+            return View();
+        }
     }
 }

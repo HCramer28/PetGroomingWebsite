@@ -1,0 +1,88 @@
+﻿@model IEnumerable<FinalProject.DATA.EF.Location>
+
+@{
+    ViewBag.Title = "Locations";
+}
+<section id="locationpage"  class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@if (User.IsInRole("Admin"))
+{
+    <p style="padding-top:2em;">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        @if(User.IsInRole("Admin"))
+        {
+        <th>
+            @Html.DisplayNameFor(model => model.ReservationLimit)
+        </th>
+        }
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZipCode)
+            </td>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservationLimit)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.LocationId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LocationId })
+                </td>
+            }
+
+        </tr>
+    }
+
+</table>
+
