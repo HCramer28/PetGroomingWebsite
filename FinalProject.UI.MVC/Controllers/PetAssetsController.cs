@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FinalProject.UI.MVC.Controllers
 {
-    
+
     public class PetAssetsController : Controller
     {
         private PetGroomingEntities db = new PetGroomingEntities();
@@ -20,10 +20,23 @@ namespace FinalProject.UI.MVC.Controllers
         // GET: PetAssets
         public ActionResult Index()
         {
-            var petAssets = db.PetAssets.Include(p => p.UserDetail).Where(pa => pa.OwnerId == pa.OwnerId);
+
+            if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+            {
+                var petAssets = db.PetAssets.Include(p => p.UserDetail);
+                return View(petAssets.ToList());
+            }
+
+            else
+            {
+                string currentUser = User.Identity.GetUserId();
+                var petAssets = db.PetAssets.Where(pa => pa.OwnerId == currentUser);
+                return View(petAssets.ToList());
+            }
+
 
             //use linq 
-            return View(petAssets.ToList());
+           
         }
 
         // GET: PetAssets/Details/5
@@ -65,7 +78,7 @@ namespace FinalProject.UI.MVC.Controllers
                         (imagename.LastIndexOf("."));
                     string[] goodExts = { ".jpg", ".jpeg", ".png", ".gif" };
                     if (goodExts.Contains(ext.ToLower()))
-                    {                      
+                    {
                         petimage.SaveAs(Server.MapPath("~/Content/img/PetAssetsPics/" + imagename));
 
                     }
@@ -82,7 +95,7 @@ namespace FinalProject.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            
+
             return View(petAsset);
         }
 

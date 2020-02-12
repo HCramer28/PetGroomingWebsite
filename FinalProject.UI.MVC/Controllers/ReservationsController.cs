@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace FinalProject.UI.MVC.Controllers
 {
@@ -18,8 +19,20 @@ namespace FinalProject.UI.MVC.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
-            var reservations = db.Reservations.Include(r => r.Location).Include(r => r.PetAsset);
-            return View(reservations.ToList());
+
+            if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+            {
+                var reservations = db.Reservations.Include(r => r.Location).Include(r => r.PetAsset);
+                return View(reservations.ToList());
+            }
+
+            else
+            {
+                int currentUser = int.Parse(User.Identity.GetUserId());
+                var reservations = db.Reservations.Where(pa => pa.PetAssetId == currentUser);
+                return View(reservations.ToList());
+            }
+            
         }
 
        
