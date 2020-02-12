@@ -1,10 +1,20 @@
 ﻿@model FinalProject.DATA.EF.Location
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New Location";
 }
 
-<h2>Create</h2>
+<section id="locationpage" class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 @using (Html.BeginForm()) 

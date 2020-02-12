@@ -1,24 +1,38 @@
 ﻿@model IEnumerable<FinalProject.DATA.EF.PetAsset>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pet Information";
 }
 
-<h2>Index</h2>
+<section id="petassetpage" class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
+{
+    <p style="padding-top: 2em;">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
+        <th>
+            Pet Photo
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.PetName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PetPhoto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
+            Notes/Package
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
@@ -27,37 +41,45 @@
             @Html.DisplayNameFor(model => model.DateAdded)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+            @Html.DisplayNameFor(model => model.UserDetail.FullName)
         </th>
+        <th></th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PetName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PetPhoto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PetAssetId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PetAssetId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PetAssetId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Url.Content("~/Content/img/PetAssetsPics/" + item.PetPhoto)" alt="@item.PetPhoto" style="width:100px; height: 100px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDetail.FullName)
+            </td>
+            @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
+            {
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PetAssetId })
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PetAssetId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PetAssetId }) |
+
+            </td>
+        </tr>
+    }
 
 </table>

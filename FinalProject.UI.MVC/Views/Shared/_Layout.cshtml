@@ -16,6 +16,7 @@
     <!-- Site Title -->
     <title>Pet Grooming</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--
     CSS
     ============================================= -->
@@ -49,8 +50,8 @@
         <div class="container main-menu">
             <div class="row align-items-center justify-content-between d-flex">
                 @*<div id="logo">
-                    <a href="index.html"><img src="~/Content/img/logo.png" alt="" title="" /></a>
-                </div>*@
+                        <a href="index.html"><img src="~/Content/img/logo.png" alt="" title="" /></a>
+                    </div>*@
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
                         <li><a href="@Url.Action("Index", "Home")">Home</a></li>
@@ -58,31 +59,47 @@
                         <li><a href="@Url.Action("Packages", "Home")">Packages</a></li>
 
 
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Customer"))
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Pet Owner"))
                         {
                             <li><a href="@Url.Action("Index", "PetAssets")">Pet Details</a></li>
                             <li><a href="@Url.Action("Index", "Reservations")">Reservations</a></li>
+
                         }
-                        @*<li class="menu-has-children">
-            <a href="">Blog</a>
-            <ul>
-                <li><a href="blog-home.html">Blog Home</a></li>
-                <li><a href="blog-single.html">Blog Single</a></li>
-            </ul>
-        </li>
-        <li class="menu-has-children">
-            <a href="">Pages</a>
-            <ul>
-                <li><a href="elements.html">Elements</a></li>
-                <li class="menu-has-children">
-                    <a href="">Level 2 </a>
-                    <ul>
-                        <li><a href="#">Item One</a></li>
-                        <li><a href="#">Item Two</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>*@
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="menu-has-children">
+                                <a href="@Url.Action("AdminFunction", "Home")">Admin Functions</a>
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("Index", "UsersAdmin")">Users</a>
+                                    </li>
+                                    <li><a href="@Url.Action("Index", "RolesAdmin")">Roles</a></li>
+
+                                </ul>
+
+                            </li>
+                        }
+                        @* <li class="menu-has-children">
+                                                <a href="">Blog</a>
+                                                <ul>
+                                                    <li><a href="blog-home.html">Blog Home</a></li>
+                                                    <li><a href="blog-single.html">Blog Single</a></li>
+                                                </ul>
+                                            </li>
+                                             <li class="menu-has-children">
+                                <a href="">Pages</a>
+                                <ul>
+                                    <li><a href="elements.html">Elements</a></li>
+                                    <li class="menu-has-children">
+                                        <a href="">Level 2 </a>
+                                        <ul>
+                                            <li><a href="#">Item One</a></li>
+                                            <li><a href="#">Item Two</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>*@
                         <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
 
                     </ul>
@@ -155,6 +172,7 @@
     <script src="~/Content/js/vendor/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
     <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/Content/js/easing.min.js"></script>
     <script src="~/Content/js/hoverIntent.js"></script>
     <script src="~/Content/js/superfish.min.js"></script>

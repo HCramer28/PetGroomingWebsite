@@ -1,12 +1,22 @@
 ﻿@model IEnumerable<FinalProject.DATA.EF.Reservation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservation";
 }
 
-<h2>Index</h2>
+<section id="reservationpage" class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
-<p>
+<p style="padding-top: 2em; ">
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -34,11 +44,16 @@
         <td>
             @Html.DisplayFor(modelItem => item.PetAsset.PetName)
         </td>
+        @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
+        {
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReservationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReservationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReservationId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ReservationId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ReservationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ReservationId })
         </td>
+        }
+            
+       
     </tr>
 }
 

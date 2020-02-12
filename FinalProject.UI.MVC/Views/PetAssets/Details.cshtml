@@ -1,13 +1,23 @@
 ﻿@model FinalProject.DATA.EF.PetAsset
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Pet Details";
 }
 
-<h2>Details</h2>
+<section id="petassetpage" class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div>
-    <h4>PetAsset</h4>
+    <h4>Pet Information</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -23,11 +33,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PetPhoto)
+            <img src="@Url.Content("~/Content/img/PetAssetsPics/" + Model.PetPhoto)" alt="@Model.PetName" style="width:100px; height:100px;" />
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Notes)
+            Notes/Package
         </dt>
 
         <dd>

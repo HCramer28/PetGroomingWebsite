@@ -10,7 +10,7 @@ using FinalProject.DATA.EF;
 
 namespace FinalProject.UI.MVC.Controllers
 {
-    [Authorize]
+    
     public class ReservationsController : Controller
     {
         private PetGroomingEntities db = new PetGroomingEntities();
@@ -22,7 +22,7 @@ namespace FinalProject.UI.MVC.Controllers
             return View(reservations.ToList());
         }
 
-        
+       
         // GET: Reservations/Details/5
         public ActionResult Details(int? id)
         {

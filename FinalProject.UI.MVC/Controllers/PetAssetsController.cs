@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.DATA.EF;
+using Microsoft.AspNet.Identity;
+
 
 namespace FinalProject.UI.MVC.Controllers
 {
@@ -18,7 +20,9 @@ namespace FinalProject.UI.MVC.Controllers
         // GET: PetAssets
         public ActionResult Index()
         {
-            var petAssets = db.PetAssets.Include(p => p.UserDetail);
+            var petAssets = db.PetAssets.Include(p => p.UserDetail).Where(pa => pa.OwnerId == pa.OwnerId);
+
+            //use linq 
             return View(petAssets.ToList());
         }
 
@@ -40,7 +44,7 @@ namespace FinalProject.UI.MVC.Controllers
         // GET: PetAssets/Create
         public ActionResult Create()
         {
-            ViewBag.OwnerId = new SelectList(db.UserDetails, "UserId", "FirstName");
+            ViewBag.OwnerId = new SelectList(db.UserDetails, "UserId", "FullName");
             return View();
         }
 
@@ -49,16 +53,36 @@ namespace FinalProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PetAssetId,PetName,OwnerId,PetPhoto,Notes,IsActive,DateAdded")] PetAsset petAsset)
+        public ActionResult Create([Bind(Include = "PetAssetId,PetName,OwnerId,PetPhoto,Notes,IsActive,DateAdded")] PetAsset petAsset, HttpPostedFileBase petimage)
         {
             if (ModelState.IsValid)
             {
+                string imagename = "noimage.png";
+                if (petimage != null)
+                {
+                    imagename = petimage.FileName;
+                    string ext = imagename.Substring
+                        (imagename.LastIndexOf("."));
+                    string[] goodExts = { ".jpg", ".jpeg", ".png", ".gif" };
+                    if (goodExts.Contains(ext.ToLower()))
+                    {                      
+                        petimage.SaveAs(Server.MapPath("~/Content/img/PetAssetsPics/" + imagename));
+
+                    }
+                    else
+                    {
+                        imagename = "noimage.png";
+                    }
+                }
+                petAsset.PetPhoto = imagename;
+                petAsset.OwnerId = User.Identity.GetUserId();
+                petAsset.DateAdded = DateTime.Now;
                 db.PetAssets.Add(petAsset);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OwnerId = new SelectList(db.UserDetails, "UserId", "FirstName", petAsset.OwnerId);
+            
             return View(petAsset);
         }
 
@@ -74,7 +98,7 @@ namespace FinalProject.UI.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.OwnerId = new SelectList(db.UserDetails, "UserId", "FirstName", petAsset.OwnerId);
+            //ViewBag.OwnerId = new SelectList(db.UserDetails, "UserId", "FirstName", petAsset.OwnerId);
             return View(petAsset);
         }
 
@@ -83,10 +107,18 @@ namespace FinalProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PetAssetId,PetName,OwnerId,PetPhoto,Notes,IsActive,DateAdded")] PetAsset petAsset)
+        public ActionResult Edit([Bind(Include = "PetAssetId,PetName,OwnerId,PetPhoto,Notes,IsActive,DateAdded")] PetAsset petAsset, HttpPostedFileBase petimage)
         {
             if (ModelState.IsValid)
             {
+                string imagename = petimage.FileName;
+                string ext = imagename.Substring(imagename.LastIndexOf("."));
+                string[] goodExts = { ".jpg", ".jpeg", ".png", ".gif" };
+                if (goodExts.Contains(ext.ToLower()))
+                {
+                    petimage.SaveAs(Server.MapPath("~/Content/img/PetAssetsPics/" + imagename));
+                    petAsset.PetPhoto = imagename;
+                }
                 db.Entry(petAsset).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
