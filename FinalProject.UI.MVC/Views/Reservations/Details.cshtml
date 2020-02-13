@@ -1,15 +1,25 @@
 ﻿@model FinalProject.DATA.EF.Reservation
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Reservation Details";
 }
 
-<h2>Details</h2>
+<section id="reservationpage" class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div>
-    <h4>Reservation</h4>
-    <hr />
-    <dl class="dl-horizontal">
+
+    
+    <dl class="dl-horizontal" style="padding-top:2em;">
         <dt>
             @Html.DisplayNameFor(model => model.ReservationDate)
         </dt>

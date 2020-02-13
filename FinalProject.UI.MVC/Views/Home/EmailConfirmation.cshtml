@@ -1,0 +1,23 @@
+﻿@model FinalProject.UI.MVC.Models.ContactViewModel
+@{
+    ViewBag.Title = "Email Confirmation";
+}
+
+<section id="contactpage" class="banner-area relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-between">
+            <div class="about-content col-lg-12">
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
+                <h1 class="text-white">@ViewBag.Title</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div>
+    <h4>We recieved the following message:</h4>
+    <p>@Model.Message</p>
+    <h4>We will respond as soon as we can to @Model.Email Thank you for contacting us!</h4>
+</div>
+

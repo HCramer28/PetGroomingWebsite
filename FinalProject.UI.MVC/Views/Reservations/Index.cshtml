@@ -16,9 +16,12 @@
     </div>
 </section>
 
+@if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
+{
 <p style="padding-top: 2em; ">
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 <table class="table">
     <tr>
         <th>
