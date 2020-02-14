@@ -36,7 +36,7 @@ namespace FinalProject.UI.MVC.Controllers
 
 
             //use linq 
-           
+
         }
 
         // GET: PetAssets/Details/5
@@ -124,14 +124,19 @@ namespace FinalProject.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                string imagename = petimage.FileName;
-                string ext = imagename.Substring(imagename.LastIndexOf("."));
-                string[] goodExts = { ".jpg", ".jpeg", ".png", ".gif" };
-                if (goodExts.Contains(ext.ToLower()))
+                string image = "~/Content/img/PetAsseetsPics/noimage.png";
+                if (petimage != null)
                 {
-                    petimage.SaveAs(Server.MapPath("~/Content/img/PetAssetsPics/" + imagename));
-                    petAsset.PetPhoto = imagename;
+                    string imagename = petimage.FileName;
+                    string ext = imagename.Substring(imagename.LastIndexOf("."));
+                    string[] goodExts = { ".jpg", ".jpeg", ".png", ".gif" };
+                    if (goodExts.Contains(ext.ToLower()))
+                    {
+                        petimage.SaveAs(Server.MapPath("~/Content/img/PetAssetsPics/" + imagename));
+                        petAsset.PetPhoto = imagename;
+                    }
                 }
+
                 db.Entry(petAsset).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

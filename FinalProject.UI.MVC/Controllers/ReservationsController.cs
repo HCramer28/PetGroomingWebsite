@@ -57,7 +57,15 @@ namespace FinalProject.UI.MVC.Controllers
 
             string currentUser = User.Identity.GetUserId();
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName");
-            ViewBag.PetAssetId = new SelectList(db.PetAssets.Where(pa => pa.OwnerId == currentUser), "PetAssetId", "PetName", "OwenerId");
+            if (User.IsInRole("Admin"))
+            {
+                ViewBag.PetAssetId = new SelectList(db.PetAssets, "PetAssetId", "PetName", "OwnerId");
+            }
+            else
+            {
+                ViewBag.PetAssetId = new SelectList(db.PetAssets.Where(pa => pa.OwnerId == currentUser), "PetAssetId", "PetName", "OwenerId");
+            }
+
 
             return View();
         }
@@ -87,7 +95,7 @@ namespace FinalProject.UI.MVC.Controllers
                     return RedirectToAction("Create");
                 }
 
-                
+
             }
 
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName", reservation.LocationId);
@@ -109,7 +117,15 @@ namespace FinalProject.UI.MVC.Controllers
             }
             string currentUser = User.Identity.GetUserId();
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName", reservation.LocationId);
-            ViewBag.PetAssetId = new SelectList(db.PetAssets.Where(pa => pa.OwnerId == currentUser), "PetAssetId", "PetName", reservation.PetAssetId);
+            if (User.IsInRole("Admin"))
+            {
+                ViewBag.PetAssetID = new SelectList(db.PetAssets, "PetAssetId", "PetName", reservation.PetAssetId);
+            }
+            else
+            {
+                ViewBag.PetAssetId = new SelectList(db.PetAssets.Where(pa => pa.OwnerId == currentUser), "PetAssetId", "PetName", reservation.PetAssetId);
+            }
+
             return View(reservation);
         }
 

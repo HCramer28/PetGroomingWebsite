@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
@@ -21,8 +21,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
+   
+    <div class="form-horizontal" style="padding-top:2em;">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -50,7 +50,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input id="submit" type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -69,5 +69,15 @@
             $("#ReservationDate").datepicker({ changeMonth: true, });
         });
 
+        $(document).ready(function () {
+            if (ViewBag.Message != null) {
+                $("#submit").on("click", function () {
+                    alert("This date is full for this location. Please select another date and(or) location.")
+                });
+            }
+            
+        });
+
     </script>
+   
 }

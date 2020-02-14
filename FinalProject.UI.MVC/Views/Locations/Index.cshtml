@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "Locations";
 }
-<section id="locationpage"  class="banner-area relative">
+<section id="locationpage" class="banner-area relative">
     <div class="overlay overlay-bg"></div>
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizs</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
@@ -16,14 +16,9 @@
 </section>
 
 
-@if (User.IsInRole("Admin"))
-{
-    <p style="padding-top:2em;">
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
 
-<table class="table">
+
+<table class="table" style="padding-top:2em;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.LocationName)
@@ -40,13 +35,13 @@
         <th>
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
-        @if(User.IsInRole("Admin"))
+        @if (User.IsInRole("Admin"))
         {
-        <th>
-            @Html.DisplayNameFor(model => model.ReservationLimit)
-        </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationLimit)
+            </th>
         }
-        
+
         <th></th>
     </tr>
 
@@ -85,4 +80,10 @@
     }
 
 </table>
+@if (User.IsInRole("Admin"))
+{
+    <p style="padding-top:2em; padding-left:2em;">
+        @Html.ActionLink("Create New", "Create", new { @class="btn"})
+    </p>
+}
 
