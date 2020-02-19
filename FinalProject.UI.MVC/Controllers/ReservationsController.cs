@@ -66,7 +66,7 @@ namespace FinalProject.UI.MVC.Controllers
                 ViewBag.PetAssetId = new SelectList(db.PetAssets.Where(pa => pa.OwnerId == currentUser), "PetAssetId", "PetName", "OwenerId");
             }
 
-
+            ViewBag.ErrorMessage = false;
             return View();
         }
 
@@ -87,12 +87,16 @@ namespace FinalProject.UI.MVC.Controllers
                 {
                     db.Reservations.Add(reservation);
                     db.SaveChanges();
+                    ViewBag.Message = null;
                     return RedirectToAction("Index");
+
                 }
                 else
                 {
-                    ViewBag.Message = ("This date is full for this location. Please choose another date and(or) location.");
-                    return RedirectToAction("Create");
+                    ViewBag.ErrorMessage = true;
+                    ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName", reservation.LocationId);
+                    ViewBag.PetAssetId = new SelectList(db.PetAssets, "PetAssetId", "PetName", reservation.PetAssetId);
+                    return View(reservation);
                 }
 
 
@@ -125,7 +129,7 @@ namespace FinalProject.UI.MVC.Controllers
             {
                 ViewBag.PetAssetId = new SelectList(db.PetAssets.Where(pa => pa.OwnerId == currentUser), "PetAssetId", "PetName", reservation.PetAssetId);
             }
-
+            ViewBag.ErrorMessage = false;
             return View(reservation);
         }
 
@@ -138,12 +142,26 @@ namespace FinalProject.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reservation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var loc = db.Locations.Where(x => x.LocationId == reservation.LocationId).FirstOrDefault();
+                int limit = loc.ReservationLimit;
+                var dayDate = db.Reservations.Where(x => x.ReservationDate == reservation.ReservationDate
+                && x.LocationId == reservation.LocationId).Count();
+                if (limit > dayDate)
+                {
+                    db.Entry(reservation).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = true;
+                    ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName", reservation.LocationId);
+                    ViewBag.PetAssetId = new SelectList(db.PetAssets, "PetAssetId", "PetName", reservation.PetAssetId);
+                    return View(reservation);
+                }
+
             }
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "LocationName", reservation.LocationId);
-            ViewBag.PetAssetId = new SelectList(db.PetAssets, "PetAssetId", "PetName", reservation.PetAssetId);
+
             return View(reservation);
         }
 

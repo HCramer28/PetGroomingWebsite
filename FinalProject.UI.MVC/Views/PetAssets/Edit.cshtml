@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
@@ -20,75 +20,76 @@
 @using (Html.BeginForm("Edit", "PetAssets", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Pet Information</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PetAssetId)
-        @Html.HiddenFor(model => model.PetPhoto)
-        @Html.HiddenFor(model => model.OwnerId)
-        @Html.HiddenFor(model => model.DateAdded)
-
-        @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
-        {
-            <div class="form-group">
-                @Html.LabelFor(model => model.PetName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PetName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PetName, "", new { @class = "text-danger" })
-                </div>
+    <div class="container" style="padding-top:2em; padding-bottom:2em;">
+        <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
+            <div class="col-md-4">
+                <p>
+                    <strong>@Html.DisplayNameFor(model => model.PetPhoto): </strong><br />
+                    <img src="~/Content/img/PetAssetsPics/@Model.PetPhoto" style="width:200px;height:200px;" />
+                </p>
             </div>
-
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PetPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" name="petimage" />
-                    @*@Html.EditorFor(model => model.PetPhoto, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PetPhoto, "", new { @class = "text-danger" })*@
-                </div>
-            </div>
-        }
-
-
-
-        <div class="form-group">
-            Notes/Packages
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
-        {
-            <div class="form-group">
-                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.IsActive)
-                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PetName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PetName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PetName, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.PetAssetId)
+                @Html.HiddenFor(model => model.PetPhoto)
+                @Html.HiddenFor(model => model.OwnerId)
+                @Html.HiddenFor(model => model.DateAdded)
+                @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PetPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="petimage" />
+                            @*@Html.EditorFor(model => model.PetPhoto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PetPhoto, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                }
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        Notes/Packages
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.IsActive)
+                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" style="color:#00a5b8;"/>
+                            <strong style="font:bolder !important;font-size:medium;">@Html.ActionLink("Back to List", "Index")</strong>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        }
 
-
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

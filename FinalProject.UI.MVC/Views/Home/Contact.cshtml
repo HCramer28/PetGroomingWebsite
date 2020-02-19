@@ -17,11 +17,10 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container" style="padding-top:2em; padding-bottom:2em;">
+        <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
+            <div class="col-md-12">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -56,11 +55,14 @@
                 <br />
                 <div class="form-group">
                     <div class="col-md-10">
-                        <button type="submit" class="btn btn-large purple">Send Message</button>
+                        <button type="submit" class="btn btn-large purple" style="color:#00a5b8">Send Message</button>
                     </div>
                 </div>
+
             </div>
+
         </div>
+
 
     </div>
 }

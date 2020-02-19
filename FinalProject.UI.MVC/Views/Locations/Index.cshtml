@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizs</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
@@ -71,7 +71,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.LocationId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.LocationId }) |
+                    
                     @Html.ActionLink("Delete", "Delete", new { id = item.LocationId })
                 </td>
             }
@@ -82,7 +82,7 @@
 </table>
 @if (User.IsInRole("Admin"))
 {
-    <p style="padding-top:2em; padding-left:2em;">
+    <p style="padding-top:2em; padding-left:2em;font-size:medium;">
         @Html.ActionLink("Create New", "Create", new { @class="btn"})
     </p>
 }

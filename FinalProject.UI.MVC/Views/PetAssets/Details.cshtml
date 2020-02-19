@@ -1,7 +1,7 @@
 ﻿@model FinalProject.DATA.EF.PetAsset
 
 @{
-    ViewBag.Title = "Pet Details";
+    ViewBag.Title = Model.PetName +"'s" + " Details";
 }
 
 <section id="petassetpage" class="banner-area relative">
@@ -9,68 +9,43 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
     </div>
 </section>
 
-<div>
-    <h4>Pet Information</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PetName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PetName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PetPhoto)
-        </dt>
-
-        <dd>
-            <img src="@Url.Content("~/Content/img/PetAssetsPics/" + Model.PetPhoto)" alt="@Model.PetName" style="width:100px; height:100px;" />
-        </dd>
-
-        <dt>
-            Notes/Package
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateAdded)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
-
-    </dl>
+<div class="container" style="padding-top:2em; padding-bottom:2em;">
+    <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
+        <div class="col-md-4">
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.PetPhoto): </strong><br />
+                <img src="~/Content/img/PetAssetsPics/@Model.PetPhoto" style="width:200px;height:200px;" />
+            </p>
+            <p style="font-size:medium;">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.PetAssetId }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <div class="col-md-4" style="padding-left:15em;">
+            <p>
+                <strong>Notes/Package</strong>
+                @Html.DisplayFor(model => model.Notes)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.IsActive)</strong>
+                @Html.DisplayFor(model => model.IsActive)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.DateAdded)</strong>
+                @Html.DisplayFor(model => model.DateAdded)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.UserDetail.FirstName)</strong>
+                @Html.DisplayFor(model => model.UserDetail.FirstName)
+            </p>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PetAssetId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

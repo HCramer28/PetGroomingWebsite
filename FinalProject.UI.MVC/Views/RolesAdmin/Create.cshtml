@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
@@ -20,25 +20,27 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="container" style="padding-top:2em; padding-bottom:2em;">
+        <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
 
-    <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="padding-top:2em;">
+                    <input type="submit" value="Create" class="btn btn-default" style=" color:#00a5b8"/>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+
+
+        
     </div>
 }
 

@@ -237,6 +237,13 @@
     <Content Include="Content\img\blog\prev.jpg" />
     <Content Include="Content\img\blog\s-img.jpg" />
     <Content Include="Content\img\blog\user-info.png" />
+    <Content Include="Content\img\bubbles.jfif" />
+    <Content Include="Content\img\bubbles.jpg" />
+    <Content Include="Content\img\bubbles1.jpg" />
+    <Content Include="Content\img\bubbles2.jfif" />
+    <Content Include="Content\img\bubbles3.jpg" />
+    <Content Include="Content\img\bubbles4-1.jpg" />
+    <Content Include="Content\img\bubbles4.jpg" />
     <Content Include="Content\img\d1.jpg" />
     <Content Include="Content\img\d2.jpg" />
     <Content Include="Content\img\d3.jpg" />
@@ -287,14 +294,6 @@
     <Content Include="Content\img\o2.jpg" />
     <Content Include="Content\img\o3.jpg" />
     <Content Include="Content\img\o4.jpg" />
-    <Content Include="Content\img\packages\about-img.jpg" />
-    <Content Include="Content\img\packages\d1.jpg" />
-    <Content Include="Content\img\packages\d2.jpg" />
-    <Content Include="Content\img\packages\d3.jpg" />
-    <Content Include="Content\img\packages\d4.jpg" />
-    <Content Include="Content\img\packages\d5.jpg" />
-    <Content Include="Content\img\packages\d6.jpg" />
-    <Content Include="Content\img\packages\hot-deal.jpg" />
     <Content Include="Content\img\PetAssetsPics\noimage.png" />
     <Content Include="Content\img\price-bg.png" />
     <Content Include="Content\img\puppy-1022421_1280.jpg" />
@@ -765,6 +764,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\packages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

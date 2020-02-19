@@ -60,11 +60,12 @@
         </td>
         @if (User.IsInRole("Admin") || User.IsInRole("Pet Owner"))
         {
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.PetAssetId })|
-                @Html.ActionLink("Details", "Details", new { id = item.PetAssetId }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.PetAssetId }) 
-            </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PetAssetId })|
+            @Html.ActionLink("Details", "Details", new { id = item.PetAssetId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PetAssetId })
+
+        </td>
         }
         else
         {

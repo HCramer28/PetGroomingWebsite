@@ -1,7 +1,7 @@
 ﻿@model FinalProject.DATA.EF.PetAsset
 
 @{
-    ViewBag.Title = "Delete Pet";
+    ViewBag.Title = "Delete " + Model.PetName;
 }
 
 <section id="petassetpage" class="banner-area relative">
@@ -9,74 +9,56 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
     </div>
 </section>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>PetAsset</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PetName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PetName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PetPhoto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PetPhoto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateAdded)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<h2 style="color:#00a5b8;">Are you sure want to delete @Model.PetName?</h2>
+<div class="container" style="padding-top:2em; padding-bottom:2em;">
+    <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
+        <div class="col-md-4">
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.PetPhoto): </strong><br />
+                <img src="~/Content/img/PetAssetsPics/@Model.PetPhoto" style="width:200px;height:200px;" />
+            </p>
         </div>
-    }
+        <div class="col-md-8">
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.PetName)</strong>
+                @Html.DisplayFor(model => model.PetName)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.Notes)</strong>
+                @Html.DisplayFor(model => model.Notes)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.IsActive)</strong>
+                @Html.DisplayFor(model => model.IsActive)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.DateAdded)</strong>
+                @Html.DisplayFor(model => model.DateAdded)
+            </p>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.UserDetail.FirstName)</strong>
+                @Html.DisplayFor(model => model.UserDetail.FirstName)
+            </p>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" style="color:#00a5b8;" /> |
+                <strong style="font-size:medium;">@Html.ActionLink("Back to List", "Index")</strong>
+                    
+            </div>
+            }
+        </div>
+    
+    </div>
 </div>
+
+

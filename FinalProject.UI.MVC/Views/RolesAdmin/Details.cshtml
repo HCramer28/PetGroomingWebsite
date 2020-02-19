@@ -9,47 +9,49 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
     </div>
 </section>
 
-<div>
-    <h4>Roles.</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
+<div class="container" style="padding-top:2em; padding-bottom:2em;">
+    <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
+        <div class="col-md-4">
+            <p>
+                <strong>Name of Role: </strong><br/>
+                @Html.DisplayFor(model => model.Name)
+            </p>
+        </div>
+        <div class="col-md-8">
+            <p>List of users in this role</p>
+            @if (ViewBag.UserCount == 0)
+            {
+                
+                <p>No users found in this role.</p>
+            }
+
+            <table class="table">
+
+                @foreach (var item in ViewBag.Users)
+                {
+                    <tr>
+                        <td>
+                            @item.UserName
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <p style="padding-left:1em;font-size:medium;">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </div>
-<h4>List of users in this role</h4>
-@if (ViewBag.UserCount == 0)
-{
-    <hr />
-    <p>No users found in this role.</p>
-}
 
-<table class="table">
 
-    @foreach (var item in ViewBag.Users)
-    {
-        <tr>
-            <td>
-                @item.UserName
-            </td>
-        </tr>
-    }
-</table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
 
 

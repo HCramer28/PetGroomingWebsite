@@ -9,19 +9,19 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-between">
             <div class="about-content col-lg-12">
-                <h6 class="text-white">Grooming For all pets of all Sizing</h6>
+                <h6 class="text-white">Grooming For all pets of all Sizes</h6>
                 <h1 class="text-white">@ViewBag.Title</h1>
             </div>
         </div>
     </div>
 </section>
-<div class="row">
-    <div class="col-md-8">
+<div class="container" style="padding-top:2em; padding-bottom:2em;">
+    <div class="row" style="border:solid #00a5b8 2px;background-color:lightgray;width:60%;margin:auto;padding-top:1em;">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                 @Html.AntiForgeryToken()
-                <h4 style="padding-top:2em;">Use a local account to log in.</h4>
-                <hr />
+                <p style="color:#00a5b8; font-size:medium; padding-left:1em;">Use a local account to log in.</p>
+                
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -47,13 +47,13 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input type="submit" value="Log in" class="btn btn-default" style="color:#00a5b8" />
                     </div>
                 </div>
-                <p>
+                <p style="font-size:medium; padding-left:1em;">
                     @Html.ActionLink("Register a new user?", "Register")
                 </p>
-                <p>
+                <p style="font-size:medium; padding-left:1em;">
                     @Html.ActionLink("Forget your password?", "ForgotPassword")
                 </p>
             }
