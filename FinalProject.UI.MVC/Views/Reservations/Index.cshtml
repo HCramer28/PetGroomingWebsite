@@ -3,44 +3,45 @@
 @{
     ViewBag.Title = "Reservation";
 }
-<style>
+@*<style>
 
 
-    .searchTerm {
-        border: 3px solid #00a5b8;
-        padding-top: 2em;
-        padding: 5px;
-        height: 30px;
-        border-radius: 5px 0 0 5px;
-        outline: none;
-        color: #9DBFAF;
-    }
-
-        .searchTerm:focus {
-            color: #00a5b8;
+        .searchTerm {
+            border: 3px solid #00a5b8;
+            padding-top: 2em;
+            padding: 5px;
+            height: 30px;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            color: #9DBFAF;
         }
 
-    .searchButton {
-        width: 40px;
-        height: 36px;
-        border: 1px solid #00a5b8;
-        background: #00a5b8;
-        text-align: center;
-        color: #fff;
-        border-radius: 0 5px 5px 0;
-        cursor: pointer;
-        font-size: 20px;
-    }
+            .searchTerm:focus {
+                color: #00a5b8;
+            }
 
-    /*Resize the wrap to see the search bar change!*/
-    .wrap {
-        width: 30%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
+        .searchButton {
+            width: 40px;
+            height: 36px;
+            border: 1px solid #00a5b8;
+            background: #00a5b8;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /*Resize the wrap to see the search bar change!
+        .wrap {
+            width: 30%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>*@
 
 <section id="reservationpage" class="banner-area relative">
     <div class="overlay overlay-bg"></div>
@@ -60,17 +61,17 @@
         @Html.ActionLink("Create New Reservation", "Create")
     </p>
 }
-@if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+@*@if (User.IsInRole("Admin") || User.IsInRole("Employee"))
 {
     <div style="padding-top:2em; padding-bottom:1.5em;">
         <div class="search">
-            <input type="text" class="searchTerm" placeholder="Location">
+            <input type="text" class="searchTerm" placeholder="Search Location">
             <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
             </button>
         </div>
     </div>
-}
+}*@
 
 <table class="table">
     <tr>
@@ -112,3 +113,4 @@
     }
 
 </table>
+
